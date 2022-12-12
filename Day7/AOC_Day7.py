@@ -40,6 +40,6 @@ for key, value in dirs.items():
         if value < best_dir['value'] or best_dir['value'] == 0:
             best_dir['name']  = key
             best_dir['value'] = value
-            
+
 print('pt1:',pt_1)
 print('pt2: ',best_dir['name'],best_dir['value'])

@@ -1,5 +1,6 @@
 forest  = []
-trees   = [line.rstrip() for line in open('Day8/day-8-input.txt')]
+file = 'Day8/day-8-test-input.txt'#'Day8/day-8-input.txt'
+trees   = [line.rstrip() for line in open(file)]
 count   = 0;
 for i, row in enumerate(trees):
     forest.append(list(row))
