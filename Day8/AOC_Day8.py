@@ -28,20 +28,18 @@ def checkVisibile(row,column,tree):
         return True
     return False
 
-row_action = []
-
+rows = []
 for i, row in enumerate(forest):
     skip = False
-    print(row)
+    rows.append(row)
     if i == 0 or (i+1) == len(forest):
-        row_action.append('skip')
         continue
     for j, tree in enumerate(row):
         if j == 0 or (j+1) == len(row):
             continue
         elif checkVisibile(i,j,tree):
             visible += 1
-    if not skip:
-        row_action.append('processed')
+
 print(visible)
-print(row_action)
+for row in rows:
+    print(row)
