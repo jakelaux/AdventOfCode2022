@@ -24,18 +24,24 @@ def checkTree(index,tree,index_setter,dir):
     return is_visible
 
 def checkVisibile(row,column,tree):
-    if checkTree(column,tree,column-1,'updown') or checkTree(column,tree,len(forest)-column-1,'updown') or checkTree(row,tree,row-1,'leftright') or checkTree(row,tree,len(forest[0])-row-1,'leftright'):
+    if checkTree(column,tree,column,'updown') or checkTree(column,tree,len(forest)-column,'updown') or checkTree(row,tree,row,'leftright') or checkTree(row,tree,len(forest[0])-row,'leftright'):
         return True
     return False
 
+row_action = []
+
 for i, row in enumerate(forest):
+    skip = False
+    print(row)
     if i == 0 or (i+1) == len(forest):
+        row_action.append('skip')
         continue
     for j, tree in enumerate(row):
         if j == 0 or (j+1) == len(row):
             continue
         elif checkVisibile(i,j,tree):
             visible += 1
-
-            
+    if not skip:
+        row_action.append('processed')
 print(visible)
+print(row_action)
