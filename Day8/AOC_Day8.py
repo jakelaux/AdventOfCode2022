@@ -1,5 +1,5 @@
 forest = []
-file = 'Day8/day-8-test-input.txt'#'Day8/day-8-input.txt'
+file = 'Day8/day-8-input.txt'
 trees = open(file).read().splitlines()
 for i, row in enumerate(trees):
     forest.append(list(row))
@@ -16,13 +16,15 @@ def isVisible(l,r,u,d,tree):
     return ml or mr or mu or md
 
 def countTrees(comp,tree):
-    dir_total = 1
+    dir_total = 0
     for c in comp:
         if c < tree:
             dir_total += 1
-        elif c <= tree:
+        elif c >= tree:
             dir_total += 1
             return dir_total
+    if dir_total == 0:
+        dir_total = 1 
     return dir_total
 
 #updated to use range to skip edges that were included in my original enumerate loop
@@ -37,10 +39,11 @@ for row in range(1, rows-1):
         d = [ forest[row+i][col] for i in range(1, rows-row) ]
         if isVisible(l,r,u,d,tree):
             visible += 1
-        score = countTrees(l,tree)*countTrees(r,tree)*countTrees(u,tree)*countTrees(d,tree)
-        print(score)
-        if score > highest:
-            highest = score
+        tree_score = 1
+        for dir in (l,r,u,d):
+            tree_score *= countTrees(dir,tree)
+        if tree_score > highest:
+            highest = tree_score
 
-print("pt1:", visible)
+print("pt1:",  visible)
 print("pt2: ", highest)
